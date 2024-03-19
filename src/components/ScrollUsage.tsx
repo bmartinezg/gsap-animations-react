@@ -7,7 +7,9 @@ gsap.registerPlugin(ScrollTrigger);
 export const ScrollUsage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<GSAPTimeline>();
+  const isMobile = window.innerWidth <= 640;
 
+  console.log(isMobile);
   useEffect(() => {
     const ctx = gsap.context(() => {
       tlRef.current = gsap.timeline({
@@ -28,9 +30,9 @@ export const ScrollUsage = () => {
     tlRef.current.to(containerRef.current, {
       duration: 1,
       borderRadius: "80px",
-      width: "1200px",
-      maxWidth: "1200px",
-      minWidth: "1200px",
+      width: isMobile ? "600px" : "1200px",
+      maxWidth: isMobile ? "600px" : "1200px",
+      minWidth: isMobile ? "600px" : "1200px",
     });
 
     return () => ctx.revert();
@@ -50,8 +52,8 @@ export const ScrollUsage = () => {
       <div>
         <div
           style={{
-            height: "500px",
-            width: "500px",
+            height: isMobile ? "200px" : "500px",
+            width: isMobile ? "200px" : "500px",
             maxWidth: "none",
             backgroundColor: "red",
             borderRadius: "50%",
